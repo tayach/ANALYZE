@@ -1,0 +1,2 @@
+wheel
+midas-mosaik==1.0.5

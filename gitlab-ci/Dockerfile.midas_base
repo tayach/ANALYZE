@@ -1,0 +1,19 @@
+FROM python:3.8.10-slim-buster
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update && apt-get install -y \
+    git  # used by midasctl \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir /files
+WORKDIR /files
+
+# first only copy requirements.txt to make sure docker uses caching
+COPY requirements.txt /files/requirements.txt
+
+# install midas and download data
+RUN pip install --no-input -r requirements.txt && \
+mkdir -p /files/midas && \
+midasctl configure --autocfg && \
+midasctl download

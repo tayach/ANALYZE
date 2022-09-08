@@ -1,0 +1,23 @@
+ARG  MIDAS_MOSAIK_VERSION
+FROM registry.frihsb.de/pyrate/smasher/midas-mosaik-baseimage:${MIDAS_MOSAIK_VERSION}
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update && apt-get install -y \
+    git  # used by midasctl \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /files
+WORKDIR /files
+
+# first only copy requirements.txt to make sure docker uses caching
+COPY requirements.txt /files/requirements.txt
+RUN pip install -r requirements.txt && \
+mkdir -p /files/midas && \
+midasctl configure --autocfg && \
+midasctl download
+
+ENV PYTHONPATH "${PYTHONPATH}:/builds/pyrate/smasher/rettij:/builds/pyrate/smasher/cosim:"
+
+# now at the end we can copy everything else additionally to requirements.txt
+COPY . /files/
