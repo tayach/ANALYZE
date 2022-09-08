@@ -4,6 +4,7 @@ services:
 
 stages:
   - build
+  - scenarios
 
 variables:
   IMAGE_NAME: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
