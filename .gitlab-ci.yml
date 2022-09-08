@@ -37,4 +37,10 @@ powergrid_scenario:
   image: $IMAGE_NAME
   stage: scenarios
   script:
-    - python3 src/smasher/scripts/powergrid_attack.py
+    - python3 src/smasher/scripts/powergrid_scenario.py
+
+qmarket_scenario:
+  image: $IMAGE_NAME
+  stage: scenarios
+  script:
+    - python3 src/smasher/scripts/qmarket_scenario.py

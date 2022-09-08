@@ -1,2 +1,4 @@
 wheel
 midas-mosaik==1.0.5
+midas-qmarket==1.0.0
+midas-qmarket-agents==1.0.0

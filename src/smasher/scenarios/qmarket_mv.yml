@@ -12,22 +12,19 @@ qmarket_mv:
     - der
     - goa
   custom_modules:
-    - [marketagents, market_agents.module:MarketAgentsModule]
-    - [qmarket, qmarket.module:QMarketModule]
+    - [marketagents, midas.modules.qmarket_agents.module:MarketAgentsModule]
+    - [qmarket, midas.modules.qmarket.module:QMarketModule]
   step_size: 15*60
   start_date: 2017-06-01 00:00:00+0100
+  end: 1*6*60*60
   forecast_horizon_hours: 0.25
-  end: 1*6*4*900
-  with_arl: False
   store_params:
-    filename: pyrate_1d_qmarket.hdf5
+    filename: pyrate_qmarket.hdf5
   powergrid_params:
     midasmv:
       gridfile: midasmv
   sndata_params:
     midasmv:
-      randomize_data: False
-      randomize_cos_phi: False
       land_mapping:
         1: [[0, 1.0], [2, 1.0], [3, 2.0], [6, 2.0], [7, 1.0]]
         3: [[2, 1.0], [3, 1.0], [6, 1.0], [7, 1.0]]
@@ -39,13 +36,9 @@ qmarket_mv:
         9: [[2, 1.0], [3, 1.0], [6, 2.0], [7, 1.0]]
         10: [[0, 2.0], [2, 1.0], [3, 1.0], [6, 2.0], [7, 1.0]]
         11: [[0, 1.0], [2, 1.0], [3, 1.0], [6, 2.0], [7, 1.0]]
-        # 13: [[1, 1.0], [5, 1.0]]
-        # 14: [[4, 2.0], [6, 1.0]]
   comdata_params:
     midasmv:
       interpolate: True
-      randomize_data: False
-      randomize_cos_phi: False
       mapping:
         13: [[SuperMarket, 3.0]]
         14: [[SmallHotel, 2.0]]
@@ -54,15 +47,12 @@ qmarket_mv:
       weather_mapping:
         WeatherCurrent:
           - interpolate: True
-            randomize: False
         WeatherForecast:
           - interpolate: True
-            randomize: False
             forecast_error: 0.15
   der_params:
     midasmv_pv:
       grid_name: midasmv
-      # import_str: pysimmods.mosaik.flex_mosaik:FlexibilitySimulator
       inverter_mode: inductive
       provide_forecasts: True
       use_decimal_percent: True
@@ -100,8 +90,6 @@ qmarket_mv:
       u_max: 1.04
       u_min: 0.96
   goa_params:
-    sim_name: Operator
-    cmd: python
     midasmv:
       gridfile: midasmv
       grid_load_sensor: True
