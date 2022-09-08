@@ -1,13 +1,16 @@
-image: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/docker:20.10.15
+image: 
+services:
+  - docker:dind
 
 stages:
   - build
 
+variables:
+  IMAGE_NAME: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+
 midas-mosaik-baseimage-build:
-  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/docker:20.10.15
   stage: build
-  services:
-    - docker:dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
@@ -21,14 +24,11 @@ midas-mosaik-baseimage-build:
     expire_in: 1 hour
 
 docker-build:
-  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/docker:20.10.15
   stage: build
   needs: [midas-mosaik-baseimage-build]
-  services:
-    - docker:dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
     # create docker image specifically for this branch/tag
-    - docker build --build-arg MIDAS_MOSAIK_VERSION=$(cat gitlab_ci/midas_version.txt) -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA" . -f Dockerfile.smasher
-    - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA"
+    - docker build --build-arg MIDAS_MOSAIK_VERSION=$(cat gitlab_ci/midas_version.txt) -t $IMAGE_NAME . -f Dockerfile.smasher
+    - docker push $IMAGE_NAME
