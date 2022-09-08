@@ -31,3 +31,9 @@ docker-build:
     # create docker image specifically for this branch/tag
     - docker build --build-arg MIDAS_MOSAIK_VERSION=$(cat gitlab_ci/midas_version.txt) -t $IMAGE_NAME . -f gitlab_ci/Dockerfile.smasher
     - docker push $IMAGE_NAME
+
+powergrid_scenario:
+  image: $IMAGE_NAME
+  stage: scenarios
+  script:
+    - python3 src/smasher/scripts/powergrid_attack.py

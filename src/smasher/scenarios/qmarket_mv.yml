@@ -1,0 +1,113 @@
+#######################################################################
+# Pyrate scenario file
+#######################################################################
+qmarket_mv:
+  parent:
+  modules:
+    - store
+    - powergrid
+    - sndata
+    - comdata
+    - weather
+    - der
+    - goa
+  custom_modules:
+    - [marketagents, market_agents.module:MarketAgentsModule]
+    - [qmarket, qmarket.module:QMarketModule]
+  step_size: 15*60
+  start_date: 2017-06-01 00:00:00+0100
+  forecast_horizon_hours: 0.25
+  end: 1*6*4*900
+  with_arl: False
+  store_params:
+    filename: pyrate_1d_qmarket.hdf5
+  powergrid_params:
+    midasmv:
+      gridfile: midasmv
+  sndata_params:
+    midasmv:
+      randomize_data: False
+      randomize_cos_phi: False
+      land_mapping:
+        1: [[0, 1.0], [2, 1.0], [3, 2.0], [6, 2.0], [7, 1.0]]
+        3: [[2, 1.0], [3, 1.0], [6, 1.0], [7, 1.0]]
+        4: [[0, 2.0], [3, 2.0], [7, 1.0]]
+        5: [[3, 2.0], [7, 1.0]]
+        6: [[0, 2.0], [3, 1.0]]
+        7: [[0, 2.0], [2, 1.0], [3, 2.0], [7, 1.0]]
+        8: [[0, 1.0], [3, 1.0], [6, 1.0]]
+        9: [[2, 1.0], [3, 1.0], [6, 2.0], [7, 1.0]]
+        10: [[0, 2.0], [2, 1.0], [3, 1.0], [6, 2.0], [7, 1.0]]
+        11: [[0, 1.0], [2, 1.0], [3, 1.0], [6, 2.0], [7, 1.0]]
+        # 13: [[1, 1.0], [5, 1.0]]
+        # 14: [[4, 2.0], [6, 1.0]]
+  comdata_params:
+    midasmv:
+      interpolate: True
+      randomize_data: False
+      randomize_cos_phi: False
+      mapping:
+        13: [[SuperMarket, 3.0]]
+        14: [[SmallHotel, 2.0]]
+  weather_params:
+    bremen:
+      weather_mapping:
+        WeatherCurrent:
+          - interpolate: True
+            randomize: False
+        WeatherForecast:
+          - interpolate: True
+            randomize: False
+            forecast_error: 0.15
+  der_params:
+    midasmv_pv:
+      grid_name: midasmv
+      # import_str: pysimmods.mosaik.flex_mosaik:FlexibilitySimulator
+      inverter_mode: inductive
+      provide_forecasts: True
+      use_decimal_percent: True
+      unit: mw
+      mapping:
+        3: [[PV, 1.31]]
+        4: [[PV, 1.2]]
+        5: [[PV, 1.29]]
+        6: [[PV, 1.26]]
+        7: [[PV, 1.01]]
+        8: [[PV, 0.69]]
+        9: [[PV, 1.02]]
+        11: [[PV, 1.26]]
+        13: [[PV, 1.38]]
+        14: [[PV, 0.83]]
+      weather_provider_mapping:
+        PV: [bremen, 0]
+      weather_forecast_mapping:
+        PV: [bremen, 0]
+  marketagents_params:
+    midasmv:
+      mapping:
+        - [PV, 3, 0]
+        - [PV, 4, 0]
+        - [PV, 5, 0]
+        - [PV, 6, 0]
+        - [PV, 7, 0]
+        - [PV, 8, 0]
+        - [PV, 9, 0]
+        - [PV, 11, 0]
+        - [PV, 13, 0]
+        - [PV, 14, 0]
+  qmarket_params:
+    midasmv:
+      u_max: 1.04
+      u_min: 0.96
+  goa_params:
+    sim_name: Operator
+    cmd: python
+    midasmv:
+      gridfile: midasmv
+      grid_load_sensor: True
+      grid_sgen_sensor: False
+      grid_busvm_sensor: True
+      grid_busload_sensor: False
+      der_sgen_sensor: True
+      overvoltage: 1.1
+      undervoltage: 0.9
