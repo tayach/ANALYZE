@@ -1,5 +1,5 @@
 ARG  MIDAS_MOSAIK_VERSION
-FROM registry.frihsb.de/pyrate/smasher/midas-mosaik-baseimage:${MIDAS_MOSAIK_VERSION}
+FROM registry.gitlab.com/pyrate-project/smasher/midas-mosaik-baseimage:${MIDAS_MOSAIK_VERSION}
 
 ENV DEBIAN_FRONTEND noninteractive
 
