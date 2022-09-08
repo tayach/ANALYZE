@@ -9,7 +9,7 @@ def main():
         )
     )
 
-    mia.run("qmarket_mv", {}, scenario_path)
+    mia.run("qmarket_mv", {"end": 15*60*60}, scenario_path)
 
 
 if __name__ == "__main__":
