@@ -80,6 +80,8 @@ This scenario concentrates on ICT and is a direct extension for the market focus
 Certain connections, namely from Photovoltaic to market agents and from market agents to the market model, will now be redirected through the ICT simulator rettij.
 This scenario is used in the ict data manipulation experiment. 
 
+![ICT focus scenario image]](https://gitlab.com/-/ide/project/pyrate-project/smasher/tree/main/-/pyrate%20ICT-scenario.png/ "Overall topology of the ICT focus scenario.")
+
 ## Experiments
 
 There are 3 different experiments (palaestrai experiment yaml files) that are located in `src/smasher/experiments` and python scripts in `src/smasher/scripts` to start each of those (names end with `_experiment.py`).
