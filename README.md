@@ -80,7 +80,7 @@ This scenario concentrates on ICT and is a direct extension for the market focus
 Certain connections, namely from Photovoltaic to market agents and from market agents to the market model, will now be redirected through the ICT simulator rettij.
 This scenario is used in the ict data manipulation experiment. 
 
-![ICT focus scenario image]](https://gitlab.com/-/ide/project/pyrate-project/smasher/tree/main/-/pyrate%20ICT-scenario.png/ "Overall topology of the ICT focus scenario.")
+![ICT focus scenario image](pyrate%20ICT-scenario.png "Overall topology of the ICT focus scenario.")
 
 ## Experiments
 
