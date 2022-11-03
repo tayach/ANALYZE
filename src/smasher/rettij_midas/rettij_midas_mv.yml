@@ -1,0 +1,40 @@
+ict_focus:
+  name: ict_focus
+  parent: qmarket_mv
+  with_ict: True
+  modules: []
+  custom_modules:
+    - [marketagents, market_agents.module:MarketAgentsModule]
+    - [qmarket, qmarket.module:QMarketModule]
+    - [rettij, rettij_midas.module:RettijModule]
+  rettij_params:
+    # defines the module params. Module params are general on rettij level
+    midasmv: # defines the instantiation params of rettij. If a param is not defined here, midas uses the param defined in the module above
+      # Path -> i.e.: ~/.kube/config ...
+      #kubeconfig_path: add full path, if config is not at $home/.kube/config
+      topology_path: cosim/scenarios/topologies/midas_mv_topology.yml
+      sequence_path: ""  # empty string = no sequence
+      # monitoring_config_path: monitoring_config.yml
+      # qmarket_module_name: qmarket
+      rettij_mappings:
+        "Pysimmods-0.Photovoltaic-0": f1-a-pv-0
+        "Pysimmods-0.Photovoltaic-1": f1-b-pv-1
+        "Pysimmods-0.Photovoltaic-2": f1-c-pv-2
+        "Pysimmods-0.Photovoltaic-3": f1-d-pv-3
+        "Pysimmods-0.Photovoltaic-4": f1-e-pv-4
+        "Pysimmods-0.Photovoltaic-5": f1-f-pv-5
+        "Pysimmods-0.Photovoltaic-6": f1-g-pv-6
+        "Pysimmods-0.Photovoltaic-7": f1-h-pv-7
+        "Pysimmods-0.Photovoltaic-8": f1-i-pv-8
+        "Pysimmods-0.Photovoltaic-9": f1-j-pv-9
+        "MarketAgents-0.MarketAgentModel_PV_0": market-agent-pv-0
+        "MarketAgents-0.MarketAgentModel_PV_1": market-agent-pv-1
+        "MarketAgents-0.MarketAgentModel_PV_2": market-agent-pv-2
+        "MarketAgents-0.MarketAgentModel_PV_3": market-agent-pv-3
+        "MarketAgents-0.MarketAgentModel_PV_4": market-agent-pv-4
+        "MarketAgents-0.MarketAgentModel_PV_5": market-agent-pv-5
+        "MarketAgents-0.MarketAgentModel_PV_6": market-agent-pv-6
+        "MarketAgents-0.MarketAgentModel_PV_7": market-agent-pv-7
+        "MarketAgents-0.MarketAgentModel_PV_8": market-agent-pv-8
+        "MarketAgents-0.MarketAgentModel_PV_9": market-agent-pv-9
+        "QMarket-0.QMarketModel_0": qmarket-model-0
