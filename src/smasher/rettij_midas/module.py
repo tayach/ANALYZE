@@ -9,7 +9,7 @@ from pyparsing import Optional
 import smasher_rettij.rettij_mosaik
 
 LOG = logging.getLogger(__name__)
-CO_SIM_DIR = os.path.normpath(os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "cosim"))
+SMASHER_DIR = os.path.normpath(os.path.join(os.path.dirname(os.path.realpath(__file__)), ".."))
 CUSTOM_COMPONENTS_DIR = Path(os.path.dirname(smasher_rettij.rettij_mosaik.__file__)) / "custom-components"
 
 rettij_node_actuators = {}
@@ -33,7 +33,7 @@ class RettijModule(UpgradeModule):
         """Check the module params: If all expected values are set; provide default values."""
 
         module_params.setdefault(
-            "topology_path", Path(CO_SIM_DIR) / "scenarios" / "topologies" / "simple-pyrate-topology.yml"
+            "topology_path", Path(SMASHER_DIR) / "rettij_midas" / "topologies" / "midas_mv_topology.yml"
         )
         module_params.setdefault("sequence_path", "")
         module_params.setdefault("kubeconfig_path", None)

@@ -1,0 +1,875 @@
+#---------Nodes------------------------------------------------------
+nodes:
+
+  #---------Upper Switch--------------------------------------------
+
+  - id: upper-switch #n002
+    device: switch
+    component: simple-switch
+    interfaces:
+      - id: i0
+        channel: c001 # connects to feeder1-switch5-o
+      - id: i1
+        channel: c101 # connects to feeder1-switch1-o
+      - id: i2
+        channel: c004 # connects to feeder 2 switch (n201)
+      - id: i3
+        channel: c106
+      - id: i4
+        channel: c110
+      - id: i5
+        channel: c128
+      - id: i6
+        channel: c005 # connects to control centre
+
+
+  #---------Market SWITCH-----------------------------------------------------
+  - id: market-switch # n301
+    device: switch
+    component: simple-switch
+    interfaces:
+      - id: i0
+        channel: c005 # connects to feeder 1 and 2 switch
+      #   data-rate: 100Mbps
+      - id: i1
+        channel: c501 # market connection pv-1-agent
+      - id: i2
+        channel: c502 # market connection pv-2-agent
+      - id: i3
+        channel: c503 # market connection pv-3-agent
+      - id: i4
+        channel: c504 # market connection pv-4-agent
+      - id: i5
+        channel: c505 # market connection pv-5-agent
+      - id: i6
+        channel: c506 # market connection pv-6-agent
+      - id: i7
+        channel: c507 # market connection pv-7-agent
+      - id: i8
+        channel: c508 # market connection pv-8-agent
+      - id: i9
+        channel: c509 # market connection pv-9-agent
+      - id: i10
+        channel: c510 # market connection pv-10-agent
+      - id: i11
+        channel: c511 # market connection pv-11-agent
+      - id: i12
+        channel: c512 # market connection pv-12-agent
+      - id: i13
+        channel: c513 # market connection pv-13-agent
+      - id: i14
+        channel: c514 # market connection pv-14-agent
+      - id: i15
+        channel: c500 # market connection pv-14-agent
+      - id: i16
+        channel: c530 # market connection to qmarket-agent
+  #---------Market AGENTS-----------------------------------------------------
+  # For each PV / Bus in the cigre net, there is one corresponding market actor
+  - id: qmarket-model-0
+    data:
+      q_offers: ''
+      q_set: ''
+    device: container
+    component: simple-pyrate-runner
+    interfaces:
+      - id: i0
+        channel: c530
+        data-rate: 100Mbps
+        ip: 10.0.1.130/24
+
+  - id: market-agent-pv-0
+    data:
+      q_offers: ''
+      q_set: ''
+      schedule: ''
+    device: container
+    component: simple-pyrate-runner
+    interfaces:
+      - id: i0
+        channel: c500
+        ip: 10.0.1.132/24
+
+  - id: market-agent-pv-1
+    data:
+      q_offers: ''
+      q_set: ''
+      schedule: ''
+    device: container
+    component: simple-pyrate-runner
+    interfaces:
+      - id: i0
+        channel: c501
+        ip: 10.0.1.133/24
+
+  - id: market-agent-pv-2
+    data:
+      q_offers: ''
+      q_set: ''
+      schedule: ''
+    device: container
+    component: simple-pyrate-runner
+    interfaces:
+      - id: i0
+        channel: c502
+        ip: 10.0.1.134/24
+
+  - id: market-agent-pv-3
+    data:
+      q_offers: ''
+      q_set: ''
+      schedule: ''
+    device: container
+    component: simple-pyrate-runner
+    interfaces:
+      - id: i0
+        channel: c503
+        ip: 10.0.1.135/24
+
+  - id: market-agent-pv-4
+    data:
+      q_offers: ''
+      q_set: ''
+      schedule: ''
+    device: container
+    component: simple-pyrate-runner
+    interfaces:
+      - id: i0
+        channel: c504
+        ip: 10.0.1.136/24
+
+  - id: market-agent-pv-5
+    data:
+      q_offers: ''
+      q_set: ''
+      schedule: ''
+    device: container
+    component: simple-pyrate-runner
+    interfaces:
+      - id: i0
+        channel: c505
+        ip: 10.0.1.137/24
+
+  - id: market-agent-pv-6
+    data:
+      q_offers: ''
+      q_set: ''
+      schedule: ''
+    device: container
+    component: simple-pyrate-runner
+    interfaces:
+      - id: i0
+        channel: c506
+        ip: 10.0.1.138/24
+
+  - id: market-agent-pv-7
+    data:
+      q_offers: ''
+      q_set: ''
+      schedule: ''
+    device: container
+    component: simple-pyrate-runner
+    interfaces:
+      - id: i0
+        channel: c507
+        ip: 10.0.1.139/24
+
+  - id: market-agent-pv-8
+    data:
+      q_offers: ''
+      q_set: ''
+      schedule: ''
+    device: container
+    component: simple-pyrate-runner
+    interfaces:
+      - id: i0
+        channel: c508
+        ip: 10.0.1.140/24
+
+  - id: market-agent-pv-9
+    data:
+      q_offers: ''
+      q_set: ''
+      schedule: ''
+    device: container
+    component: simple-pyrate-runner
+    interfaces:
+      - id: i0
+        channel: c509
+        ip: 10.0.1.141/24
+
+  - id: market-agent-pv-10
+    data:
+      q_offers: ''
+      q_set: ''
+      schedule: ''
+    device: container
+    component: simple-pyrate-runner
+    interfaces:
+      - id: i0
+        channel: c510
+        ip: 10.0.1.142/24
+
+  - id: market-agent-pv-11
+    data:
+      q_offers: ''
+      q_set: ''
+      schedule: ''
+    device: container
+    component: simple-pyrate-runner
+    interfaces:
+      - id: i0
+        channel: c511
+        ip: 10.0.1.143/24
+
+  - id: market-agent-pv-12
+    data:
+      q_offers: ''
+      q_set: ''
+      schedule: ''
+    device: container
+    component: simple-pyrate-runner
+    interfaces:
+      - id: i0
+        channel: c512
+        ip: 10.0.1.144/24
+
+  - id: market-agent-pv-13
+    data:
+      q_offers: ''
+      q_set: ''
+      schedule: ''
+    device: container
+    component: simple-pyrate-runner
+    interfaces:
+      - id: i0
+        channel: c513
+        ip: 10.0.1.145/24
+
+  - id: market-agent-pv-14
+    data:
+      q_offers: ''
+      q_set: ''
+      schedule: ''
+    device: container
+    component: simple-pyrate-runner
+    interfaces:
+      - id: i0
+        channel: c514
+        ip: 10.0.1.146/24
+
+  #---------feeder1-----------------------------------------------------
+
+  ##---------feeder1-switches-(outside of locations)------------------------------------------------
+
+
+  - id: feeder1-switch5-o #n105
+    device: switch
+    component: simple-switch
+    interfaces:
+      - id: i0
+        channel: c001 # connects to Upper Switch
+      #   data-rate: 100Mbps
+      - id: i1
+        channel: c115 # connects to f1-d-switch
+      #   data-rate: 100Mbps
+      - id: i2
+        channel: c118 # connects to f1-e-switch
+      #    data-rate: 100Mbps
+      - id: i4
+        channel: c136 # connects to f1-j-switch
+      #   data-rate: 100Mbps
+      - id: i5
+        channel: c140 # connects to f1-k-switch
+      #   data-rate: 100Mbps
+      - id: i6
+        channel: c122
+      - id: i7
+        channel: c125
+      - id: i8
+        channel: c132 #connects to n127 / f1-g
+    config:
+      service-name: switch
+
+
+  ##---------feeder1-f1-a-----------------------------------------------------
+
+  - id: f1-a-switch #n107
+    device: switch
+    component: simple-switch
+    interfaces:
+      - id: i0
+        channel: c101 # connects to n002-switch
+      #  data-rate: 100Mbps
+      - id: i1
+        channel: c102 # connects to f1-a-pc
+      #  data-rate: 100Mbps
+    config:
+      service-name: switch
+
+  - id: f1-a-pv-0 #n108
+    data:
+      schedule: ''
+    device: container
+    component: simple-pyrate-runner
+    interfaces:
+      - id: i0
+        channel: c102 # connects to f1-a-switch
+        ip: 10.0.1.20/24
+
+  ##---------feeder1-f1-b-----------------------------------------------------
+
+  - id: f1-b-switch #n111
+    device: switch
+    component: simple-switch
+    interfaces:
+      - id: i0
+        channel: c106 # connects to switch
+        data-rate: 100Mbps
+      - id: i1
+        channel: c107 # connects to f1-b-rtu
+        data-rate: 100Mbps
+
+  - id: f1-b-pv-1 #n112
+    data:
+      schedule: ''
+    device: container
+    component: simple-pyrate-runner
+    interfaces:
+      - id: i0
+        channel: c107 # connects to f1-b-switch n111
+        data-rate: 100Mbps
+        ip: 10.0.1.21/24
+
+
+  ##---------feeder1-f1-c-----------------------------------------------------
+
+  - id: f1-c-switch #n114
+    device: switch
+    component: simple-switch
+    interfaces:
+      - id: i0
+        channel: c110 # connects to feeder1-switch3-o
+        data-rate: 100Mbps
+      - id: i2
+        channel: c112 # connects to f1-c-rtu
+        data-rate: 100Mbps
+    config:
+      service-name: switch
+
+  - id: f1-c-pv-2 #n116
+    device: container
+    data:
+      schedule: ''
+    component: simple-pyrate-runner
+    interfaces:
+      - id: i0
+        channel: c112 # connects to f1-c-switch
+        data-rate: 100Mbps
+        ip: 10.0.1.22/24
+  ##---------feeder1-f1-d-----------------------------------------------------
+
+  - id: f1-d-switch #n118
+    device: switch
+    component: simple-switch
+    interfaces:
+      - id: i0
+        channel: c115 # connects to feeder1-switch5-o
+        data-rate: 100Mbps
+      - id: i1
+        channel: c116 # connects to f1-d-rtu
+        data-rate: 100Mbps
+    config:
+      service-name: switch
+
+  - id: f1-d-pv-3 #n119
+    data:
+      schedule: ''
+    device: container
+    component: simple-pyrate-runner
+    interfaces:
+      - id: i0
+        channel: c116 # connects to f1-d-switch
+        data-rate: 100Mbps
+        ip: 10.0.1.23/24
+
+
+  ##---------feeder1-f1-e-----------------------------------------------------
+
+  - id: f1-e-switch #n121
+    device: switch
+    component: simple-switch
+    interfaces:
+      - id: i0
+        channel: c118 # connects to feeder1-switch5-o
+        data-rate: 100Mbps
+      - id: i1
+        channel: c119 # connects to f1-e-rtu
+        data-rate: 100Mbps
+    config:
+      service-name: switch
+
+  - id: f1-e-pv-4 #n122
+    data:
+      schedule: ''
+    device: container
+    component: simple-pyrate-runner
+    interfaces:
+      - id: i0
+        channel: c119 # connects to f1-e-switch
+        data-rate: 100Mbps
+        ip: 10.0.1.24/24
+
+
+  ##---------feeder1-f1-f-----------------------------------------------------
+
+  - id: f1-f-switch #n124
+    device: switch
+    component: simple-switch
+    interfaces:
+      - id: i0
+        channel: c122 # connects to feeder1-switch6-o
+        data-rate: 100Mbps
+      - id: i1
+        channel: c123 # connects to f1-f-rtu
+        data-rate: 100Mbps
+    config:
+      service-name: switch
+
+  - id: f1-f-pv-5 #n125
+    data:
+      schedule: ''
+    device: container
+    component: simple-pyrate-runner
+    interfaces:
+      - id: i0
+        channel: c123 # connects to f1-f-switch
+        data-rate: 100Mbps
+        ip: 10.0.1.25/24
+
+  ##---------feeder1-f1-g-----------------------------------------------------
+
+  - id: f1-g-switch #n127
+    device: switch
+    component: simple-switch
+    interfaces:
+      - id: i0
+        channel: c125 # connects to feeder1-switch6-o
+        data-rate: 100Mbps
+      - id: i1
+        channel: c126 # connects to f1-g-rtu
+        data-rate: 100Mbps
+    config:
+      service-name: switch
+
+  - id: f1-g-pv-6 #n128
+    data:
+      schedule: ''
+    device: container
+    component: simple-pyrate-runner
+    interfaces:
+      - id: i0
+        channel: c126 # connects to f1-g-switch
+        data-rate: 100Mbps
+        ip: 10.0.1.26/24
+
+  ##---------feeder1-f1-h-----------------------------------------------------
+
+  - id: f1-h-switch #n130
+    device: switch
+    component: simple-switch
+    interfaces:
+      - id: i0
+        channel: c128 # connects to feeder1-switch4-o
+        data-rate: 100Mbps
+      - id: i2
+        channel: c130 # connects to f1-h-rtu
+        data-rate: 100Mbps
+    config:
+      service-name: switch
+
+  - id: f1-h-pv-7 #n132
+    data:
+      schedule: ''
+    device: container
+    component: simple-pyrate-runner
+    interfaces:
+      - id: i0
+        channel: c130 # connects to f1-h-switch
+        data-rate: 100Mbps
+        ip: 10.0.1.27/24
+
+
+  ##---------feeder1-f1-i-----------------------------------------------------
+
+  - id: f1-i-switch #n134
+    device: switch
+    component: simple-switch
+    interfaces:
+      - id: i0
+        channel: c132 # connects to feeder1-switch6-o
+        data-rate: 100Mbps
+      - id: i2
+        channel: c134 # connects to f1-i-rtu
+        data-rate: 100Mbps
+    config:
+      service-name: switch
+
+  - id: f1-i-pv-8 #n136
+    data:
+      schedule: ''
+    device: container
+    component: simple-pyrate-runner
+    interfaces:
+      - id: i0
+        channel: c134 # connects to f1-i-switch
+        data-rate: 100Mbps
+        ip: 10.0.1.28/24
+
+
+  ##---------feeder1-f1-j-----------------------------------------------------
+
+  - id: f1-j-switch #n138
+    device: switch
+    component: simple-switch
+    interfaces:
+      - id: i0
+        channel: c136 # connects to feeder1-switch5-o
+        data-rate: 100Mbps
+      - id: i2
+        channel: c138 # connects to f1-j-rtu
+        data-rate: 100Mbps
+    config:
+      service-name: switch
+
+  - id: f1-j-pv-9 #n140
+    data:
+      schedule: ''
+    device: container
+    component: simple-pyrate-runner
+    interfaces:
+      - id: i0
+        channel: c138 # connects to f1-j-switch
+        data-rate: 100Mbps
+        ip: 10.0.1.29/24
+
+
+  ##---------feeder1-f1-k-----------------------------------------------------
+
+  - id: f1-k-switch #n142
+    device: switch
+    component: simple-switch
+    interfaces:
+      - id: i0
+        channel: c140 # connects to feeder1-switch5-o
+        data-rate: 100Mbps
+      - id: i2
+        channel: c142 # connects to f1-k-rtu
+        data-rate: 100Mbps
+    config:
+      service-name: switch
+
+  - id: f1-k-pv-10 #n144
+    data:
+      schedule: ''
+    device: container
+    component: simple-pyrate-runner
+    interfaces:
+      - id: i0
+        channel: c142 # connects to f1-k-switch
+        data-rate: 100Mbps
+        ip: 10.0.1.30/24
+
+
+  #---------feeder2-----------------------------------------------------
+
+  ##---------feeder2-switches-(outside of locations)------------------------------------------------
+
+  - id: feeder2-switch1-o #n201
+    device: switch
+    component: simple-switch
+    interfaces:
+      - id: i0
+        channel: c004 # connects to r1-a-Router n001
+        data-rate: 100Mbps
+      - id: i1
+        channel: c201 # connects to f2-a-switch
+        data-rate: 100Mbps
+      - id: i2
+        channel: c210 # connects to f2-c
+        data-rate: 100Mbps
+      - id: i3
+        channel: c205 # connects to f2-b
+        data-rate: 100Mbps
+    config:
+      service-name: switch
+
+
+  ##---------feeder2-f2-a-----------------------------------------------------
+
+  - id: f2-a-switch #n204
+    device: switch
+    component: simple-switch
+    interfaces:
+      - id: i0
+        channel: c201 # connects to feeder2-switch1-o
+        data-rate: 100Mbps
+      - id: i1
+        channel: c202 # connects to f2-a-rtu
+        data-rate: 100Mbps
+    config:
+      service-name: switch
+
+  - id: f2-a-pv-11 #n205
+    data:
+      schedule: ''
+    device: container
+    component: simple-pyrate-runner
+    interfaces:
+      - id: i0
+        channel: c202 # connects to f2-a-switch
+        data-rate: 100Mbps
+        ip: 10.0.1.31/24
+
+
+  ##---------feeder2-f2-b-----------------------------------------------------
+
+  - id: f2-b-switch #n207
+    device: switch
+    component: simple-switch
+    interfaces:
+      - id: i0
+        channel: c205 # connects to feeder2-switch2-o
+        data-rate: 100Mbps
+      - id: i2
+        channel: c207 # connects to f2-b-rtu
+        data-rate: 100Mbps
+    config:
+      service-name: switch
+
+  - id: f2-b-pv-12 #n209
+    data:
+      schedule: ''
+    device: container
+    component: simple-pyrate-runner
+    interfaces:
+      - id: i0
+        channel: c207 # connects to switch f2-b-switch
+        data-rate: 100Mbps
+        ip: 10.0.1.32/24
+
+
+  ##---------feeder1-f1-c-----------------------------------------------------
+
+  - id: f2-c-switch #n211
+    device: switch
+    component: simple-switch
+    interfaces:
+      - id: i0
+        channel: c210 # connects to feeder2-switch3-o
+        data-rate: 100Mbps
+      - id: i1
+        channel: c211 # connects to f1-c-rtu
+        data-rate: 100Mbps
+    config:
+      service-name: switch
+
+  - id: f2-c-pv-13 #n212
+    data:
+      schedule: ''
+    device: container
+    component: simple-pyrate-runner
+    interfaces:
+      - id: i0
+        channel: c211 # connects to f1-c-switch
+        data-rate: 100Mbps
+        ip: 10.0.1.33/24
+
+
+
+#---------Channels----------------------------------------------------
+
+channels:
+
+  # Channels outside the feeders
+
+  - id: c001
+    data-rate: 100Mbps
+    delay: 2ms
+
+
+  - id: c004
+    data-rate: 100Mbps
+    delay: 2ms
+
+  - id: c005
+    data-rate: 100Mbps
+    delay: 2ms
+
+  # Channels feeder1
+
+  - id: c101
+    data-rate: 100Mbps
+    delay: 2ms
+
+  - id: c102
+    data-rate: 100Mbps
+    delay: 2ms
+
+
+  - id: c106
+    data-rate: 100Mbps
+    delay: 2ms
+
+  - id: c107
+    data-rate: 100Mbps
+    delay: 2ms
+
+
+  - id: c110
+    data-rate: 100Mbps
+    delay: 2ms
+
+  - id: c112
+    data-rate: 100Mbps
+    delay: 2ms
+
+
+  - id: c115
+    data-rate: 100Mbps
+    delay: 2ms
+
+  - id: c116
+    data-rate: 100Mbps
+    delay: 2ms
+
+  - id: c118
+    data-rate: 100Mbps
+    delay: 2ms
+
+  - id: c119
+    data-rate: 100Mbps
+    delay: 2ms
+
+  - id: c122
+    data-rate: 100Mbps
+    delay: 2ms
+
+  - id: c123
+    data-rate: 100Mbps
+    delay: 2ms
+
+  - id: c125
+    data-rate: 100Mbps
+    delay: 2ms
+
+  - id: c126
+    data-rate: 100Mbps
+    delay: 2ms
+
+  - id: c128
+    data-rate: 100Mbps
+    delay: 2ms
+
+  - id: c130
+    data-rate: 100Mbps
+    delay: 2ms
+
+  - id: c132
+    data-rate: 100Mbps
+    delay: 2ms
+
+  - id: c134
+    data-rate: 100Mbps
+    delay: 2ms
+
+  - id: c136
+    data-rate: 100Mbps
+    delay: 2ms
+
+  - id: c138
+    data-rate: 100Mbps
+    delay: 2ms
+
+  - id: c140
+    data-rate: 100Mbps
+    delay: 2ms
+
+  - id: c142
+    data-rate: 100Mbps
+    delay: 2ms
+
+  # Channels feeder2
+
+  - id: c201
+    data-rate: 100Mbps
+    delay: 2ms
+
+  - id: c202
+    data-rate: 100Mbps
+    delay: 2ms
+
+  - id: c205
+    data-rate: 100Mbps
+    delay: 2ms
+
+  - id: c207
+    data-rate: 100Mbps
+    delay: 2ms
+
+  - id: c210
+    data-rate: 100Mbps
+    delay: 2ms
+
+  - id: c211
+    data-rate: 100Mbps
+    delay: 2ms
+
+  # Channels Market
+  - id: c500
+    data-rate: 100Mbps
+    delay: 2ms
+  - id: c501
+    data-rate: 100Mbps
+    delay: 2ms
+  - id: c502
+    data-rate: 100Mbps
+    delay: 2ms
+  - id: c503
+    data-rate: 100Mbps
+    delay: 2ms
+  - id: c504
+    data-rate: 100Mbps
+    delay: 2ms
+  - id: c505
+    data-rate: 100Mbps
+    delay: 2ms
+  - id: c506
+    data-rate: 100Mbps
+    delay: 2ms
+  - id: c507
+    data-rate: 100Mbps
+    delay: 2ms
+  - id: c508
+    data-rate: 100Mbps
+    delay: 2ms
+  - id: c509
+    data-rate: 100Mbps
+    delay: 2ms
+  - id: c510
+    data-rate: 100Mbps
+    delay: 2ms
+  - id: c511
+    data-rate: 100Mbps
+    delay: 2ms
+  - id: c512
+    data-rate: 100Mbps
+    delay: 2ms
+  - id: c513
+    data-rate: 100Mbps
+    delay: 2ms
+  - id: c514
+    data-rate: 100Mbps
+    delay: 2ms
+  - id: c530 # qmarket to market-switch
+    data-rate: 100Mbps
+    delay: 2ms
