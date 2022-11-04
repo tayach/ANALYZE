@@ -33,7 +33,7 @@ class RettijModule(UpgradeModule):
         """Check the module params: If all expected values are set; provide default values."""
 
         module_params.setdefault(
-            "topology_path", Path(SMASHER_DIR) / "rettij_midas" / "topologies" / "midas_mv_topology.yml"
+            "topology_path", Path(SMASHER_DIR) / "rettij_midas" / "midas_mv_topology.yml"
         )
         module_params.setdefault("sequence_path", "")
         module_params.setdefault("kubeconfig_path", None)
