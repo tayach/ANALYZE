@@ -43,3 +43,9 @@ qmarket_focus_scenario:
   stage: scenarios
   script:
     - python3 src/smasher/scripts/qmarket_focus_scenario.py
+
+ict_focus_scenario:
+  image: $IMAGE_NAME
+  stage: scenarios
+  script:
+    - python3 src/smasher/scripts/ict_focus_scenario.py

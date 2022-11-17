@@ -1,12 +1,12 @@
 """This module contains the MIDAS upgrade for rettij."""
 import logging
+import os
 from pathlib import Path
 from typing import Any, Dict
-import os
 
+import smasher_rettij.rettij_mosaik
 from midas.util.upgrade_module import UpgradeModule
 from pyparsing import Optional
-import smasher_rettij.rettij_mosaik
 
 LOG = logging.getLogger(__name__)
 SMASHER_DIR = os.path.normpath(os.path.join(os.path.dirname(os.path.realpath(__file__)), ".."))

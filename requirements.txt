@@ -6,7 +6,7 @@ pandapower==2.10.1
 numba==0.56.2
 mosaik==3.0.0
 mosaik_api==3.0.0
-midas-mosaik==1.0.5
+midas-mosaik==1.0.6
 midas-qmarket==1.0.0
 midas-qmarket-agents==1.0.0
 smasher-rettij==0.1.14

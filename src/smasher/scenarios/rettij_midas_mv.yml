@@ -4,15 +4,15 @@ ict_focus:
   with_ict: True
   modules: []
   custom_modules:
-    - [marketagents, market_agents.module:MarketAgentsModule]
-    - [qmarket, qmarket.module:QMarketModule]
+    - [qmarket_agents, midas.modules.qmarket_agents.module:MarketAgentsModule]
+    - [qmarket, midas.modules.qmarket.module:QMarketModule]
     - [rettij, rettij_midas.module:RettijModule]
   rettij_params:
     # defines the module params. Module params are general on rettij level
     midasmv: # defines the instantiation params of rettij. If a param is not defined here, midas uses the param defined in the module above
       # Path -> i.e.: ~/.kube/config ...
       #kubeconfig_path: add full path, if config is not at $home/.kube/config
-      topology_path: smasher/rettij_midas/midas_mv_topology.yml
+      topology_path: src/smasher/rettij_midas/midas_mv_topology.yml
       sequence_path: ""  # empty string = no sequence
       # monitoring_config_path: monitoring_config.yml
       # qmarket_module_name: qmarket
