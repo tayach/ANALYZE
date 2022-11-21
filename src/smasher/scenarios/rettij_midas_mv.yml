@@ -1,6 +1,6 @@
 ict_focus:
   name: ict_focus
-  parent: qmarket_mv
+  parent: market_focus
   with_ict: True
   modules: []
   custom_modules:

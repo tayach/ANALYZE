@@ -8,6 +8,10 @@ mosaik==3.0.0
 mosaik_api==3.0.0
 midas-mosaik==1.0.6
 midas-qmarket==1.0.0
-midas-qmarket-agents==1.0.0
+midas-qmarket-agents==1.0.2
 smasher-rettij==0.1.14
 rettij==1.7.0
+git+https://gitlab.com/arl2/palaestrai.git
+palaestrai-mosaik
+midas-palaestrai
+

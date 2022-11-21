@@ -1,6 +1,6 @@
 # Distributed VAr Attacks -- MIDAS scenario file
 #
-attack_mv_static:
+powergrid_focus_static:
   parent:
   modules:
     - store
@@ -48,8 +48,8 @@ attack_mv_static:
       weather_provider_mapping:
         PV: [bremen, 0]
 
-attack_mv_dynamic:
-  parent: attack_mv_static
+powergrid_focus:
+  parent: powergrid_focus_static
   modules:
     - sndata
     - comdata

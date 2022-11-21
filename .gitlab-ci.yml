@@ -47,5 +47,6 @@ qmarket_focus_scenario:
 ict_focus_scenario:
   image: $IMAGE_NAME
   stage: scenarios
+  allow_failure: true  # No kubernetes in gitlab
   script:
     - python3 src/smasher/scripts/ict_focus_scenario.py

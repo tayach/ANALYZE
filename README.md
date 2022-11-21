@@ -71,7 +71,7 @@ This scenario is used in the qmarket attack experiment.
 Start this with
 
 ```bash
-python3 src/smasher/scripts/qmarket_focus_scenario.py
+python3 src/smasher/scripts/market_focus_scenario.py
 ```
 
 ### ICT Focus Scenario
@@ -81,6 +81,12 @@ Certain connections, namely from Photovoltaic to market agents and from market a
 This scenario is used in the ict data manipulation experiment. 
 
 ![ICT focus scenario image](pyrate%20ICT-scenario.png "Overall topology of the ICT focus scenario.")
+
+Start this with 
+
+```bash
+python3 src/smasher/scripts/ict_focus_scenario.py
+```
 
 ## Experiments
 

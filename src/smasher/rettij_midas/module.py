@@ -9,11 +9,16 @@ from midas.util.upgrade_module import UpgradeModule
 from pyparsing import Optional
 
 LOG = logging.getLogger(__name__)
-SMASHER_DIR = os.path.normpath(os.path.join(os.path.dirname(os.path.realpath(__file__)), ".."))
-CUSTOM_COMPONENTS_DIR = Path(os.path.dirname(smasher_rettij.rettij_mosaik.__file__)) / "custom-components"
+SMASHER_DIR = os.path.normpath(
+    os.path.join(os.path.dirname(os.path.realpath(__file__)), "..")
+)
+CUSTOM_COMPONENTS_DIR = (
+    Path(os.path.dirname(smasher_rettij.rettij_mosaik.__file__)) / "custom-components"
+)
 
 rettij_node_actuators = {}
 rettij_node_sensors = {}
+
 
 class RettijModule(UpgradeModule):
     """Rettij upgrade module for MIDAS 1.0."""
@@ -33,7 +38,8 @@ class RettijModule(UpgradeModule):
         """Check the module params: If all expected values are set; provide default values."""
 
         module_params.setdefault(
-            "topology_path", Path(SMASHER_DIR) / "rettij_midas" / "midas_mv_topology.yml"
+            "topology_path",
+            Path(SMASHER_DIR) / "rettij_midas" / "midas_mv_topology.yml",
         )
         module_params.setdefault("sequence_path", "")
         module_params.setdefault("kubeconfig_path", None)
@@ -49,8 +55,12 @@ class RettijModule(UpgradeModule):
         self.sim_params.setdefault("topology_path", module_params["topology_path"])
         self.sim_params.setdefault("sequence_path", module_params["sequence_path"])
         self.sim_params.setdefault("kubeconfig_path", module_params["kubeconfig_path"])
-        self.sim_params.setdefault("components_dir_path", module_params["components_dir_path"])
-        self.sim_params.setdefault("monitoring_config_path", module_params["monitoring_config_path"])
+        self.sim_params.setdefault(
+            "components_dir_path", module_params["components_dir_path"]
+        )
+        self.sim_params.setdefault(
+            "monitoring_config_path", module_params["monitoring_config_path"]
+        )
 
         # obtain rettij_mappings from yaml and put them to list for later connections
         # (they have to be defined in the yaml file)
@@ -75,16 +85,19 @@ class RettijModule(UpgradeModule):
             child_key = f"{self.model_key}_{node_id}"
             self.scenario.add_model(child_key, self.sim_key, node)
             self.scenario.script.model_start.append(
-                f"{child_key} = [e for e in {self.model_key}.children " f'if e.eid == "{node_id}"][0]\n'
+                f"{child_key} = [e for e in {self.model_key}.children "
+                f'if e.eid == "{node_id}"][0]\n'
             )
             # loop over actuator entities with type "actuator"
-            for actuator_entity in filter(lambda x: x.type == "actuator", node.children):
-                actuator_id = actuator_entity.eid[len(f"{node_id}/actuator-"):]
+            for actuator_entity in filter(
+                lambda x: x.type == "actuator", node.children
+            ):
+                actuator_id = actuator_entity.eid[len(f"{node_id}/actuator-") :]
                 rettij_node_actuators[node_id][actuator_id] = actuator_entity
 
             # loop over sensor entities with type "sensor"
             for sensor_entity in filter(lambda x: x.type == "sensor", node.children):
-                sensor_id = sensor_entity.eid[len(f"{node_id}/sensor-"):]
+                sensor_id = sensor_entity.eid[len(f"{node_id}/sensor-") :]
                 rettij_node_sensors[node_id][sensor_id] = sensor_entity
 
     def connect(self):
@@ -97,12 +110,20 @@ class RettijModule(UpgradeModule):
             sender_before_ict = ict_mapping["sender_before_ict"]
             receiver_before_ict = ict_mapping["receiver_before_ict"]
             attrs = ict_mapping["attrs"]
-            mosaik_full_id_sender = self.scenario.get_model(model_key_sender, self.sim_key).full_id
-            mosaik_full_id_receiver = self.scenario.get_model(model_key_receiver, self.sim_key).full_id
+            mosaik_full_id_sender = self.scenario.get_model(
+                model_key_sender, self.sim_key
+            ).full_id
+            mosaik_full_id_receiver = self.scenario.get_model(
+                model_key_receiver, self.sim_key
+            ).full_id
             rettij_node_id_sender = rettij_mappings[mosaik_full_id_sender]
             rettij_node_id_receiver = rettij_mappings[mosaik_full_id_receiver]
-            rettij_node_id_model_key_sender = f"{self.model_key}_{rettij_node_id_sender}"
-            rettij_node_id_model_key_receiver = f"{self.model_key}_{rettij_node_id_receiver}"
+            rettij_node_id_model_key_sender = (
+                f"{self.model_key}_{rettij_node_id_sender}"
+            )
+            rettij_node_id_model_key_receiver = (
+                f"{self.model_key}_{rettij_node_id_receiver}"
+            )
 
             sender_attrs = []
             receiver_attrs = []
@@ -139,7 +160,9 @@ class RettijModule(UpgradeModule):
                 for attr in receiver_attrs:
                     initial_data[attr[0]] = None
 
-                if (sender_before_ict and not receiver_before_ict) or (not sender_before_ict and receiver_before_ict):
+                if (sender_before_ict and not receiver_before_ict) or (
+                    not sender_before_ict and receiver_before_ict
+                ):
                     self.connect_entities(
                         rettij_node_id_model_key_receiver,
                         model_key_receiver,
@@ -154,11 +177,15 @@ class RettijModule(UpgradeModule):
                         receiver_attrs,
                     )
                 else:
-                    LOG.error(f"Unexpected case of ict_mapping! ict_mapping: {ict_mapping}")
+                    LOG.error(
+                        f"Unexpected case of ict_mapping! ict_mapping: {ict_mapping}"
+                    )
             else:
                 # connect mosaik entity model to rettij node (for normal connections)
                 if sender_before_ict and not receiver_before_ict:
-                    self.connect_entities(model_key_sender, rettij_node_id_model_key_sender, sender_attrs)
+                    self.connect_entities(
+                        model_key_sender, rettij_node_id_model_key_sender, sender_attrs
+                    )
                 elif not sender_before_ict and not receiver_before_ict:
                     initial_data = {}
                     for attr in sender_attrs:
@@ -171,7 +198,9 @@ class RettijModule(UpgradeModule):
                         initial_data=initial_data,
                     )
                 else:
-                    LOG.error(f"Unexpected case of ict_mapping! ict_mapping: {ict_mapping}")
+                    LOG.error(
+                        f"Unexpected case of ict_mapping! ict_mapping: {ict_mapping}"
+                    )
 
                 self.connect_entities(
                     rettij_node_id_model_key_receiver,
@@ -180,13 +209,17 @@ class RettijModule(UpgradeModule):
                 )
 
             # connect rettij's node with each other
-            target_interface_name = "i0"  # hardcoded as each target node currently only has a i0 interface
+            target_interface_name = (
+                "i0"  # hardcoded as each target node currently only has a i0 interface
+            )
             for attr in receiver_attrs:
                 connect_config = {
                     "attribute": attr[1],
                     "target_interface_name": target_interface_name,
                 }
-                rettij_sim.connect(rettij_node_id_sender, rettij_node_id_receiver, **connect_config)
+                rettij_sim.connect(
+                    rettij_node_id_sender, rettij_node_id_receiver, **connect_config
+                )
                 LOG.debug(
                     f"Connected {rettij_node_id_model_key_sender} --> {rettij_node_id_model_key_receiver}; "
                     f"attr: {attr}"
@@ -195,20 +228,33 @@ class RettijModule(UpgradeModule):
     def get_actuators(self):
         for node_id, node in rettij_node_actuators.items():
             for actuator in node.values():
-                actuator_full_id= actuator.full_id
-                action_space = self.scenario.get_sim(self.sim_key).get_actuator(actuator.eid).get_action_space()
+                actuator_full_id = actuator.full_id
+                action_space = (
+                    self.scenario.get_sim(self.sim_key)
+                    .get_actuator(actuator.eid)
+                    .get_action_space()
+                )
                 act = {
                     "actuator_id": f"{actuator_full_id}.value",
-                    "action_space": action_space
+                    "action_space": action_space,
                 }
                 self.scenario.actuators.append(act)
 
     def get_sensors(self):
         for node_id, node in rettij_node_sensors.items():
             for sensor in node.values():
-                sensor_full_id= sensor.full_id
-                observation_space = self.scenario.get_sim(self.sim_key).get_sensor(sensor.eid).get_action_space()
-                self.scenario.sensors.append({"sensor_id": f"{sensor_full_id}.value", "observation_space": observation_space })
+                sensor_full_id = sensor.full_id
+                observation_space = (
+                    self.scenario.get_sim(self.sim_key)
+                    .get_sensor(sensor.eid)
+                    .get_action_space()
+                )
+                self.scenario.sensors.append(
+                    {
+                        "sensor_id": f"{sensor_full_id}.value",
+                        "observation_space": observation_space,
+                    }
+                )
 
     def connect_to_db(self):
         pass

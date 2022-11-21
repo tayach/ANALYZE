@@ -1,0 +1,100 @@
+uid: "Powergrid Attack Run"
+seed: 0
+version: 3.4.1
+schedule:
+  - training_phase:
+      environments:
+        - environment:
+            uid: smasher
+            name: palaestrai_mosaik:MosaikEnvironment
+            params:  # Mosaik Environment Parameters
+              module: midas.tools.palaestrai:Descriptor
+              description_func: describe
+              instance_func: get_world
+              arl_sync_freq: &step_size 900
+              end: &end 1*6*60*60
+              params:  # Midas Parameters
+                name: powergrid_focus
+                config:
+                  - src/smasher/scenarios/powergrid_mv.yml
+                end: *end
+                step_size: *step_size
+                mosaik_params: {addr: [127.0.0.1, 56789]}
+                store_params: {filename: smasher_powergrid_arl.hdf5}
+          reward:
+            name: midas.tools.palaestrai.rewards:GridHealthReward
+            params: {}
+      agents:
+        - name: mighty_attacker
+          brain: 
+            name: palaestrai.agent.dummy_brain:DummyBrain
+            params: {}
+          muscle: 
+            name: palaestrai.agent.dummy_muscle:DummyMuscle
+            params: {}
+          objective: 
+            name: palaestrai.agent.dummy_objective:DummyObjective
+            params: {"params": 1 }
+          sensors: &all_sensors
+            # Assumption: Agent knows all voltages in the system
+            - smasher.Powergrid-0.0-bus-1.vm_pu
+            - smasher.Powergrid-0.0-bus-2.vm_pu
+            - smasher.Powergrid-0.0-bus-3.vm_pu
+            - smasher.Powergrid-0.0-bus-4.vm_pu
+            - smasher.Powergrid-0.0-bus-5.vm_pu
+            - smasher.Powergrid-0.0-bus-6.vm_pu
+            - smasher.Powergrid-0.0-bus-7.vm_pu
+            - smasher.Powergrid-0.0-bus-8.vm_pu
+            - smasher.Powergrid-0.0-bus-9.vm_pu
+            - smasher.Powergrid-0.0-bus-10.vm_pu
+            - smasher.Powergrid-0.0-bus-11.vm_pu
+            - smasher.Powergrid-0.0-bus-12.vm_pu
+            - smasher.Powergrid-0.0-bus-13.vm_pu
+            - smasher.Powergrid-0.0-bus-14.vm_pu
+          actuators:
+            - smasher.Pysimmods-0.Photovoltaic-0.p_set_mw
+            - smasher.Pysimmods-0.Photovoltaic-0.q_set_mvar
+            - smasher.Pysimmods-0.Photovoltaic-1.p_set_mw
+            - smasher.Pysimmods-0.Photovoltaic-1.q_set_mvar
+            - smasher.Pysimmods-0.Photovoltaic-2.p_set_mw
+            - smasher.Pysimmods-0.Photovoltaic-2.q_set_mvar
+            - smasher.Pysimmods-0.Photovoltaic-3.p_set_mw
+            - smasher.Pysimmods-0.Photovoltaic-3.q_set_mvar
+        - name: mighty_defender
+          brain: 
+            name: palaestrai.agent.dummy_brain:DummyBrain
+            params: {}
+          muscle: 
+            name: palaestrai.agent.dummy_muscle:DummyMuscle
+            params: {}
+          objective: 
+            name: palaestrai.agent.dummy_objective:DummyObjective
+            params: {"params": 1 }
+          sensors: *all_sensors
+          actuators:
+            - smasher.Pysimmods-0.Photovoltaic-4.p_set_mw
+            - smasher.Pysimmods-0.Photovoltaic-4.q_set_mvar
+            - smasher.Pysimmods-0.Photovoltaic-5.p_set_mw
+            - smasher.Pysimmods-0.Photovoltaic-5.q_set_mvar
+            - smasher.Pysimmods-0.Photovoltaic-6.p_set_mw
+            - smasher.Pysimmods-0.Photovoltaic-6.q_set_mvar
+            - smasher.Pysimmods-0.Photovoltaic-7.p_set_mw
+            - smasher.Pysimmods-0.Photovoltaic-7.q_set_mvar
+      simulation:
+        name: palaestrai.simulation:VanillaSimController
+        conditions:
+          - name: palaestrai.simulation:VanillaSimControllerTerminationCondition
+            params: {}
+      phase_config:
+        mode: train
+        worker: 1
+        episodes: 1
+  - test_phase:
+      phase_config:
+        mode: test
+        worker: 1
+        episodes: 1
+run_config:
+  condition:
+    name: palaestrai.experiment:VanillaRunGovernorTerminationCondition
+    params: {}   
