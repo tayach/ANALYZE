@@ -1,8 +1,8 @@
-# SM4SH3R
+# ANALYSE
 
 ## Description
 
-The PYRATE software suite, better known as "SM4SH3R" is the fearless beast that can take down whole energy grids in a simulation just by pure artificial intelligence!
+The PYRATE software suite, better known as "ANALYSE" is the fearless beast that can take down whole energy grids in a simulation just by pure artificial intelligence!
 
 Maybe. Sometimes. In the future!
 
