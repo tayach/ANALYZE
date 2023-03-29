@@ -42,7 +42,7 @@ qmarket_focus_scenario:
   image: $IMAGE_NAME
   stage: scenarios
   script:
-    - python3 src/analyse/scripts/qmarket_focus_scenario.py
+    - python3 src/analyse/scripts/market_focus_scenario.py
 
 ict_focus_scenario:
   image: $IMAGE_NAME

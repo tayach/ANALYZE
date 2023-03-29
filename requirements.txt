@@ -12,6 +12,7 @@ midas-qmarket-agents==1.0.2
 smasher-rettij==0.1.14
 rettij==1.7.0
 git+https://gitlab.com/arl2/palaestrai.git
+git+https://gitlab.com/arl2/harl.git
 palaestrai-mosaik
-midas-palaestrai
+midas-palaestrai==1.0.8
 

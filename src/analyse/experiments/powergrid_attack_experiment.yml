@@ -13,6 +13,7 @@ schedule:
               instance_func: get_world
               arl_sync_freq: &step_size 900
               end: &end 1*6*60*60
+              silence_missing_input_connections_warning: true
               params:  # Midas Parameters
                 name: powergrid_focus
                 config:
@@ -22,19 +23,26 @@ schedule:
                 mosaik_params: {addr: [127.0.0.1, 56789]}
                 store_params: {filename: analyse_powergrid_arl.hdf5}
           reward:
-            name: midas.tools.palaestrai.rewards:GridHealthReward
+            name: midas.tools.palaestrai.rewards:ExtendedGridHealthReward
             params: {}
       agents:
         - name: mighty_attacker
           brain: 
-            name: palaestrai.agent.dummy_brain:DummyBrain
-            params: {}
+            name: harl.ddpg.brain:DDPGBrain
+            params:
+              gamma: 0.99
+              tau: 0.005
+              batch_size: 128
+              alpha: 0.001 # actor
+              beta: 0.001 # critic
+              fc_dims: [64, 64]
+              replay_size: 256
           muscle: 
-            name: palaestrai.agent.dummy_muscle:DummyMuscle
+            name: harl.ddpg.muscle:DDPGMuscle
             params: {}
-          objective: 
-            name: palaestrai.agent.dummy_objective:DummyObjective
-            params: {"params": 1 }
+          objective:
+            name: midas.tools.palaestrai.objectives:PowerGridAttackerObjective
+            params: {is_defender: false}
           sensors: &all_sensors
             # Assumption: Agent knows all voltages in the system
             - analyse.Powergrid-0.0-bus-1.vm_pu
@@ -62,14 +70,21 @@ schedule:
             - analyse.Pysimmods-0.Photovoltaic-3.q_set_mvar
         - name: mighty_defender
           brain: 
-            name: palaestrai.agent.dummy_brain:DummyBrain
-            params: {}
+            name: harl.ddpg.brain:DDPGBrain
+            params:
+              gamma: 0.99
+              tau: 0.005
+              batch_size: 128
+              alpha: 0.001 # actor
+              beta: 0.001 # critic
+              fc_dims: [64, 64]
+              replay_size: 256
           muscle: 
-            name: palaestrai.agent.dummy_muscle:DummyMuscle
+            name: harl.ddpg.muscle:DDPGMuscle
             params: {}
-          objective: 
-            name: palaestrai.agent.dummy_objective:DummyObjective
-            params: {"params": 1 }
+          objective:
+            name: midas.tools.palaestrai.objectives:PowerGridAttackerObjective
+            params: {is_defender: true}
           sensors: *all_sensors
           actuators:
             - analyse.Pysimmods-0.Photovoltaic-4.p_set_mw
