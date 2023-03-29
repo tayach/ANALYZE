@@ -19,7 +19,13 @@ This can be done either with git
 git clone https://gitlab.com/pyrate-project/analyse.git
 ```
 
-or if you click on the Download button.
+or, when you're visiting the GitHub Mirror, with
+
+```bash
+git clone https://github.com/stbalduin/pyrate-analyse.git
+```
+
+or by clicking on the Download button.
 For the rest of this guide it is assumed, that you have a command line running in the top-level source folder.
 
 ### Python and Dependencies
