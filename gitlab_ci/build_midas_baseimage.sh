@@ -6,7 +6,7 @@ echo "wheel" > requirements.txt
 # get midas line from requirements.txt but exclude lines beginning with a hashtag (-> comments)
 echo $(cat ${REQUIREMENTS_IN} | grep midas-mosaik | grep -E "^[^#]") >> requirements.txt
 
-REPOSITORY="registry.gitlab.com/pyrate-project/smasher/midas-mosaik-baseimage"
+REPOSITORY="registry.gitlab.com/pyrate-project/analyse/midas-mosaik-baseimage"
 MIDAS_MOSAIK_VERSION=$(cat ${REQUIREMENTS_IN} | grep midas-mosaik | sed -r 's/midas-mosaik *~*>*<*=* *//')
 echo "midas-mosaik version: ${MIDAS_MOSAIK_VERSION}"
 echo ${MIDAS_MOSAIK_VERSION}>midas_version.txt

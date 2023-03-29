@@ -16,7 +16,7 @@ First, you have to download the source files, i.e., this repository.
 This can be done either with git
 
 ```bash
-git clone https://gitlab.com/pyrate-project/smasher.git
+git clone https://gitlab.com/pyrate-project/analyse.git
 ```
 
 or if you click on the Download button.
@@ -50,7 +50,7 @@ Rettij requires a Kubernetes cluster up and running to execute the simulation. P
 
 ## Scenarios
 
-There are 3 different scenarios (MIDAS yaml files) that are located in `src/smasher/scenarios` and python scripts in `src/smasher/scripts` to start each of those (names end with `_scenario.py`).
+There are 3 different scenarios (MIDAS yaml files) that are located in `src/analyse/scenarios` and python scripts in `src/analyse/scripts` to start each of those (names end with `_scenario.py`).
 
 ### Power Grid Focus Scenario
 
@@ -60,7 +60,7 @@ This scenario is used in the power grid attack experiment.
 Start this with
 
 ```bash
-python3 src/smasher/scripts/powergrid_focus_scenario.py
+python3 src/analyse/scripts/powergrid_focus_scenario.py
 ```
 
 ### Market Focus Scenario
@@ -71,7 +71,7 @@ This scenario is used in the qmarket attack experiment.
 Start this with
 
 ```bash
-python3 src/smasher/scripts/market_focus_scenario.py
+python3 src/analyse/scripts/market_focus_scenario.py
 ```
 
 ### ICT Focus Scenario
@@ -85,22 +85,28 @@ This scenario is used in the ict data manipulation experiment.
 Start this with 
 
 ```bash
-python3 src/smasher/scripts/ict_focus_scenario.py
+python3 src/analyse/scripts/ict_focus_scenario.py
 ```
 
 ## Experiments
 
-There are 3 different experiments (palaestrai experiment yaml files) that are located in `src/smasher/experiments` and python scripts in `src/smasher/scripts` to start each of those (names end with `_experiment.py`).
+There are 3 different experiments (palaestrai experiment yaml files) that are located in `src/analyse/experiments` and python scripts in `src/analyse/scripts` to start each of those (names end with `_experiment.py`).
 
 
 ### Power Grid Attack Experiment
 
-*Write me*
+```bash
+python3 src/analyse/scripts/powergrid_attack_experiment.py
+```
 
 ### Market Attack Experiment
 
-*Write me*
+```bash
+python3 src/analyse/scripts/market_attack_experiment.py
+```
 
 ### ICT Data Manipulation Experiment
 
-*Write me*
+```bash
+python3 src/analyse/scripts/ict_attack_experiment.py
+```

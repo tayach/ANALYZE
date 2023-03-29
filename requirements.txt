@@ -2,7 +2,7 @@
 --extra-index-url https://gitlab.com/api/v4/projects/40008271/packages/pypi/simple
 
 wheel
-pandapower==2.10.1
+pandapower==2.11.1
 numba==0.56.2
 mosaik==3.0.0
 mosaik_api==3.0.0

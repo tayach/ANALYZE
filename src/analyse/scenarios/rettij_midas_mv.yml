@@ -12,7 +12,7 @@ ict_focus:
     midasmv: # defines the instantiation params of rettij. If a param is not defined here, midas uses the param defined in the module above
       # Path -> i.e.: ~/.kube/config ...
       #kubeconfig_path: add full path, if config is not at $home/.kube/config
-      topology_path: src/smasher/rettij_midas/midas_mv_topology.yml
+      topology_path: src/analyse/rettij_midas/midas_mv_topology.yml
       sequence_path: ""  # empty string = no sequence
       # monitoring_config_path: monitoring_config.yml
       # qmarket_module_name: qmarket

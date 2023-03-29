@@ -1,5 +1,5 @@
 ARG  MIDAS_MOSAIK_VERSION
-FROM registry.gitlab.com/pyrate-project/smasher/midas-mosaik-baseimage:${MIDAS_MOSAIK_VERSION}
+FROM registry.gitlab.com/pyrate-project/analyse/midas-mosaik-baseimage:${MIDAS_MOSAIK_VERSION}
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -17,7 +17,7 @@ mkdir -p /files/midas && \
 midasctl configure --autocfg && \
 midasctl download
 
-ENV PYTHONPATH "${PYTHONPATH}:/builds/pyrate/smasher/rettij:/builds/pyrate/smasher/cosim:"
+ENV PYTHONPATH "${PYTHONPATH}:/builds/pyrate/analyse/rettij:/builds/pyrate/analyse/cosim:"
 
 # now at the end we can copy everything else additionally to requirements.txt
 COPY . /files/
