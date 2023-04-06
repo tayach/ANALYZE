@@ -4,8 +4,6 @@
 
 The PYRATE software suite, better known as "ANALYSE" is the fearless beast that can take down whole energy grids in a simulation just by pure artificial intelligence!
 
-Maybe. Sometimes. In the future!
-
 ## Getting Started
 
 This section will guide you through the installation process and show you how to start a basic scenario.
@@ -52,11 +50,12 @@ pip install -r requirements.txt
 
 ### Setup Kubernetes
 
-Rettij requires a Kubernetes cluster up and running to execute the simulation. Please follow [the official instructions](https://medit.pages.frihsb.de/rettij/docs/getting-started.html#step-by-step-guide-for-installing-rettij-based-on-k3d-for-linux) from the rettij documentation to setup a local cluster correctly. (you can skip the sections about installing rettij via pip as this has been done by the `requirements.txt` already)
+Rettij requires a Kubernetes cluster up and running to execute the simulation. Please follow [the official instructions](https://frihsb.gitlab.io/rettij/docs/getting-started.html#step-by-step-guide-for-installing-rettij-on-linux-using-k3s) from the rettij documentation to setup a local cluster correctly. (you can skip the sections about installing rettij via pip as this has been done by the `requirements.txt` already)
 
 ## Scenarios
 
-There are 3 different scenarios (MIDAS yaml files) that are located in `src/analyse/scenarios` and python scripts in `src/analyse/scripts` to start each of those (names end with `_scenario.py`).
+*Scenarios* are MIDAS yaml files to build and run a co-simulation with mosaik. They serve as examples and demonstrate how different kinds of co-simulations and scenarios can be set up in ANALYSE. They do not include any learning agents yet.  
+There are 3 different scenarios located in `src/analyse/scenarios` and python scripts in `src/analyse/scripts` to start each of those (names end with `_scenario.py`).
 
 ### Power Grid Focus Scenario
 
@@ -96,7 +95,8 @@ python3 src/analyse/scripts/ict_focus_scenario.py
 
 ## Experiments
 
-There are 3 different experiments (palaestrai experiment yaml files) that are located in `src/analyse/experiments` and python scripts in `src/analyse/scripts` to start each of those (names end with `_experiment.py`).
+*Experiments* are *Scenarios* embedded in a palaestrAI experiment yaml file. Therefore, they include learning agents that observe and manipulate their environment (i.e. the co-simulation defined in the scenario files). 
+There are 3 different experiments located in `src/analyse/experiments` and python scripts in `src/analyse/scripts` to start each of those (names end with `_experiment.py`).
 
 
 ### Power Grid Attack Experiment
