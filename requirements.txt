@@ -1,18 +1,19 @@
-# gitlab pypi repo for smasher-rettij
---extra-index-url https://gitlab.com/api/v4/projects/40008271/packages/pypi/simple
+# Core RL framework and ecosystem
+palaestrai[full]>=3.5.8     # Core ARL/DRL framework (includes hARL, arsenAI, etc.):contentReference[oaicite:10]{index=10}
+palaestrai-mosaik>=1.0.0    # Interface between palaestrAI and Mosaik (enables co-sim as an RL env):contentReference[oaicite:11]{index=11}
 
-wheel
-pandapower==2.11.1
-numba==0.56.2
-mosaik==3.0.0
-mosaik_api==3.0.0
-midas-mosaik==1.0.6
-midas-qmarket==1.0.0
-midas-qmarket-agents==1.0.2
-smasher-rettij==0.1.14
-rettij==1.7.0
-git+https://gitlab.com/arl2/palaestrai.git
-git+https://gitlab.com/arl2/harl.git
-palaestrai-mosaik
-midas-palaestrai==1.0.8
+# Co-simulation and domain simulators
+midas-mosaik>=1.0.0rc2      # MIDAS framework for scenario configuration (installs Mosaik v3):contentReference[oaicite:12]{index=12}
+midas-powergrid>=1.0.0      # Power grid simulator module (uses pandapower):contentReference[oaicite:13]{index=13}
+midas-market>=1.0.0         # (If available: market simulator module, or included in midas-mosaik)
+pandapower>=2.12            # Power flow analysis library used for grid simulation:contentReference[oaicite:14]{index=14}
+mosaik-api>=3.0.0           # Mosaik co-simulation API (should be pulled in by midas) 
 
+# Network/ICT simulator
+rettij>=1.8.3               # ICT network simulator (requires Kubernetes cluster at runtime):contentReference[oaicite:15]{index=15}
+kubernetes-client>=26.1.0   # Python API client for Kubernetes (if interacting with cluster via API)
+
+# Data logging and analysis (optional)
+numpy>=1.21
+pandas>=1.4
+elasticsearch>=7.0          # Used if shipping logs to Elastic stack:contentReference[oaicite:16]{index=16}
