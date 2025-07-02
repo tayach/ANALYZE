@@ -1,17 +1,13 @@
 # Core RL + co-simulation framework
-palaestrai[full]==3.5.8
-palaestrai-mosaik==3.5.7
-midas-mosaik==2.1.0a5
-midas-powergrid==2.0.10
+palaestrai[full]
+palaestrai-mosaik
+midas-mosaik
+midas-powergrid
 
 # Power system simulator
-pandapower==2.12.0
-mosaik-api==3.0.0
+pandapower
+mosaik-api
 
-# Optional (logging, data processing)
+# Optional (data handling, non-conflicting)
 numpy
 pandas
-
-# Kubernetes support – comment out if not needed in Codex
-# rettij>=1.8.3
-# kubernetes-client>=26.1.0
