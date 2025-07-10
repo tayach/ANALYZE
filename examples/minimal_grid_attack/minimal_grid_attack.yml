@@ -1,0 +1,74 @@
+uid: "Minimal Powergrid Run"
+seed: 0
+version: 3.4.1
+schedule:
+  - training_phase:
+      environments:
+        - environment:
+            uid: minimal_env
+            name: palaestrai_mosaik:MosaikEnvironment
+            params:  # Mosaik Environment Parameters
+              module: midas.tools.palaestrai:Descriptor
+              description_func: describe
+              instance_func: get_world
+              arl_sync_freq: &step_size 900  # 15 min steps
+              end: &end 1*24*60*60         # one day
+              silence_missing_input_connections_warning: true
+              params:  # Midas Parameters
+                name: four_bus_der
+                config:
+                  - examples/minimal_grid_attack/four_bus_der.yml
+                end: *end
+                step_size: *step_size
+                mosaik_params: {addr: [127.0.0.1, 56789]}
+                store_params: {filename: minimal_arl.hdf5}
+          reward:
+            # Use a simple voltage deviation based reward. Positive values mean
+            # higher voltages, negative values lower voltages.
+            name: midas_palaestrai.rewards:VoltageBandDeviationReward
+            params: {}
+      agents:
+        - name: simple_attacker
+          brain:
+            # PPO supports discrete or continuous action spaces. Our actuator is
+            # continuous (reactive power), therefore we stick with PPO's default
+            # continuous settings.
+            name: harl.ppo.brain:PPOBrain
+            params:
+              fc_dims: [64, 64]
+              timesteps_per_batch: 4
+              n_updates_per_iteration: 4
+              max_timesteps_per_episode: 96
+          muscle:
+            name: harl.ppo.muscle:PPOMuscle
+            params: {}
+          objective:
+            name: midas.tools.palaestrai.objectives:PowerGridAttackerObjective
+            params: {is_defender: false}
+          sensors:
+            # Observe all bus voltages of the 4-bus grid
+            - analyse.Powergrid-0.0-bus-1.vm_pu
+            - analyse.Powergrid-0.0-bus-2.vm_pu
+            - analyse.Powergrid-0.0-bus-3.vm_pu
+            - analyse.Powergrid-0.0-bus-4.vm_pu
+          actuators:
+            # Control the reactive power output of the first PV unit
+            - analyse.Pysimmods-0.Photovoltaic-0.q_set_mvar
+      simulation:
+        name: palaestrai.simulation:VanillaSimController
+        conditions:
+          - name: palaestrai.simulation:VanillaSimControllerTerminationCondition
+            params: {}
+      phase_config:
+        mode: train
+        worker: 1
+        episodes: 2
+  - test_phase:
+      phase_config:
+        mode: test
+        worker: 1
+        episodes: 1
+run_config:
+  condition:
+    name: palaestrai.experiment:VanillaRunGovernorTerminationCondition
+    params: {}
