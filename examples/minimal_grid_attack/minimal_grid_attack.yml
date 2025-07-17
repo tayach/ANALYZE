@@ -55,7 +55,8 @@ schedule:
             # Control the reactive power output of the first PV unit
             - analyse.Pysimmods-0.Photovoltaic-0.q_set_mvar
       simulation:
-        name: palaestrai.simulation:VanillaSimController
+        # PalaestrAI >=3.5 expects the longer class name
+        name: palaestrai.simulation:VanillaSimulationController
         conditions:
           - name: palaestrai.simulation:VanillaSimControllerTerminationCondition
             params: {}

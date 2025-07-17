@@ -96,7 +96,8 @@ schedule:
             - analyse.Pysimmods-0.Photovoltaic-7.p_set_mw
             - analyse.Pysimmods-0.Photovoltaic-7.q_set_mvar
       simulation:
-        name: palaestrai.simulation:VanillaSimController
+        # Adjusted for palaestrAI >=3.5
+        name: palaestrai.simulation:VanillaSimulationController
         conditions:
           - name: palaestrai.simulation:VanillaSimControllerTerminationCondition
             params: {}
