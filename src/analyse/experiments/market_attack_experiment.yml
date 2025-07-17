@@ -104,7 +104,8 @@ schedule:
             # - analyse.QMarket-0.QMarketModel_0.agent_bid_6
             # - analyse.QMarket-0.QMarketModel_0.agent_bid_7
       simulation:
-        name: palaestrai.simulation:VanillaSimController
+        # Adjusted for palaestrAI >=3.5
+        name: palaestrai.simulation:VanillaSimulationController
         conditions:
           - name: palaestrai.simulation:VanillaSimControllerTerminationCondition
             params: {}
