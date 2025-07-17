@@ -8,12 +8,13 @@ schedule:
             uid: minimal_env
             name: palaestrai_mosaik:MosaikEnvironment
             params:  # Mosaik Environment Parameters
-              module: midas.tools.palaestrai:Descriptor
+              module: midas_palaestrai:Descriptor
               description_func: describe
               instance_func: get_world
               arl_sync_freq: &step_size 900  # 15 min steps
               end: &end 1*24*60*60         # one day
               silence_missing_input_connections_warning: true
+              timeout: 60
               params:  # Midas Parameters
                 name: four_bus_der
                 config:
@@ -43,19 +44,17 @@ schedule:
             name: harl.ppo.muscle:PPOMuscle
             params: {}
           objective:
-            name: midas.tools.palaestrai.objectives:PowerGridAttackerObjective
+            name: midas_palaestrai.objectives:PowerGridAttackerObjective
             params: {is_defender: false}
           sensors:
             # Observe all bus voltages of the 4-bus grid
-            - analyse.Powergrid-0.0-bus-1.vm_pu
-            - analyse.Powergrid-0.0-bus-2.vm_pu
-            - analyse.Powergrid-0.0-bus-3.vm_pu
-            - analyse.Powergrid-0.0-bus-4.vm_pu
+            - minimal_env.Powergrid-0.0-bus-1.vm_pu
+            - minimal_env.Powergrid-0.0-bus-2.vm_pu
+            - minimal_env.Powergrid-0.0-bus-3.vm_pu
           actuators:
             # Control the reactive power output of the first PV unit
-            - analyse.Pysimmods-0.Photovoltaic-0.q_set_mvar
+            - minimal_env.Pysimmods-0.Photovoltaic-0.q_set_mvar
       simulation:
-        # PalaestrAI >=3.5 expects the longer class name
         name: palaestrai.simulation:VanillaSimulationController
         conditions:
           - name: palaestrai.simulation:VanillaSimControllerTerminationCondition
