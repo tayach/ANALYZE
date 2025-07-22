@@ -1,0 +1,19 @@
+custom_four_bus_der:
+  name: custom_four_bus_der
+  parent: custom_four_bus
+  modules: [weather, der]
+  weather_params:
+    bremen:
+      weather_mapping:
+        WeatherCurrent:
+          - interpolate: True
+            randomize: True
+  der_params:
+    custom_four_bus_pv:
+      grid_name: custom_four_bus
+      mapping:
+        2: [[PV, 0.00725], [CHP, 0.014]]
+        3: [[PV, 0.00103], [CHP, 0.014]]
+      weather_provider_mapping:
+        PV: [bremen, 0]
+        CHP: [bremen, 0]
