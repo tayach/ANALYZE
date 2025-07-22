@@ -1,4 +1,4 @@
-uid: "Minimal Powergrid Run"
+uid: "Minimal Poppppwergrid Run"
 seed: 0
 version: 3.4.1
 schedule:
@@ -16,9 +16,11 @@ schedule:
               silence_missing_input_connections_warning: true
               timeout: 60
               params:  # Midas Parameters
-                name: four_bus_der
+                name: custom_four_bus_der
                 config:
-                  - examples/minimal_grid_attack/four_bus_der.yml
+                  - examples/minimal_grid_attack/custom_four_bus_der.yml:custom_four_bus_der
+                  - examples/minimal_grid_attack/custom_four_bus.yml:custom_four_bus
+                  
                 end: *end
                 step_size: *step_size
                 mosaik_params: {addr: [127.0.0.1, 56789]}
