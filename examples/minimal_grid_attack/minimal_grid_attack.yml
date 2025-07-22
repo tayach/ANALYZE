@@ -16,10 +16,10 @@ schedule:
               silence_missing_input_connections_warning: true
               timeout: 60
               params:  # Midas Parameters
-                name: custom_four_bus_der
+                name: four_bus_der
                 config:
-                  - examples/minimal_grid_attack/custom_four_bus_der.yml:custom_four_bus_der
-                  - examples/minimal_grid_attack/custom_four_bus.yml:custom_four_bus
+                  - examples/minimal_grid_attack/four_bus_der.yml:four_bus_der
+                  - examples/minimal_grid_attack/four_bus.yml:four_bus
                   
                 end: *end
                 step_size: *step_size
