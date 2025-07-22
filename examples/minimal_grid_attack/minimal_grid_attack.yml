@@ -46,7 +46,7 @@ schedule:
             name: harl.ppo.muscle:PPOMuscle
             params: {}
           objective:
-            name: midas_palaestrai.objectives:PowerGridAttackerObjective
+            name: analyse.objectives:PowerGridAttackerObjective
             params: {is_defender: false}
           sensors:
             # Observe all bus voltages of the 4-bus grid
