@@ -1,5 +1,5 @@
-custom_four_bus:
-  name: custom_four_bus
+four_bus:
+  name: four_bus
   parent:
   modules: [store, powergrid, sndata]
   step_size: 15*60
@@ -9,10 +9,10 @@ custom_four_bus:
   store_params:
     filename: minimal_fourbus.hdf5
   powergrid_params:
-    custom_four_bus:
+    four_bus:
       gridfile: simple_four_bus_system
   sndata_params:
-    custom_four_bus:
+    four_bus:
       active_mapping:
         2: [[Land_0, 0.75]]
         3: [[Land_3, 0.425]]
