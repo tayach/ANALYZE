@@ -14,7 +14,7 @@ schedule:
               arl_sync_freq: &step_size 900  # 15 min steps
               end: &end 1*24*60*60         # one day
               silence_missing_input_connections_warning: true
-              timeout: 60
+              timeout: 600
               params:  # Midas Parameters
                 name: four_bus_der
                 config:
